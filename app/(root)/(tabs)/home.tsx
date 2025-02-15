@@ -6,12 +6,15 @@
   TouchableOpacity,
   View,
 } from "react-native";
+import * as Location from "expo-location";
 import { useUser } from "@clerk/clerk-expo";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants";
 import GoogleTextInput from "@/components/GoogleTextInput";
 import Map from "@/components/Map";
+import { useLocationStore } from "@/store";
+import { useEffect, useState } from "react";
 
 const recentRides = [
   {
@@ -125,11 +128,44 @@ const recentRides = [
 ];
 
 export default function Page() {
+  const { setUserLocation, setDestinationLocation } = useLocationStore();
   const { user } = useUser();
   const isLoading = true;
 
+  const [hasPermissions, setHasPermissions] = useState(false);
+
   const handleSignOut = () => {};
   const handleDestinationPress = () => {};
+
+  useEffect(() => {
+    const requestLocation = async () => {
+      //NOTE: prompt user for permission to access location while the app is in the foreground
+      const { status } = await Location.requestForegroundPermissionsAsync();
+
+      // permission was not granted (exit)
+      if (status !== "granted") {
+        setHasPermissions(false);
+        return;
+      }
+
+      //NOTE: permission was granted so we gather all relevant information
+      let location = await Location.getCurrentPositionAsync();
+
+      const address = await Location.reverseGeocodeAsync({
+        latitude: location.coords?.latitude!,
+        longitude: location.coords?.longitude!,
+      });
+
+      // set the user location to the global store
+      setUserLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        address: `${address[0].name}, ${address[0].region}`,
+      });
+    };
+
+    requestLocation();
+  }, []);
 
   return (
     <SafeAreaView className={"bg-general-500"}>
