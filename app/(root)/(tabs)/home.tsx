@@ -16,6 +16,7 @@ import Map from "@/components/Map";
 import { useLocationStore } from "@/store";
 import { useEffect, useState } from "react";
 import "react-native-get-random-values";
+import { router } from "expo-router";
 
 const recentRides = [
   {
@@ -136,7 +137,19 @@ export default function Page() {
   const [hasPermissions, setHasPermissions] = useState(false);
 
   const handleSignOut = () => {};
-  const handleDestinationPress = () => {};
+  const handleDestinationPress = (location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    console.log(location);
+
+    // set the destination location to store
+    setDestinationLocation(location);
+
+    // navigate to next screen
+    router.push("/(root)/find-ride");
+  };
 
   useEffect(() => {
     const requestLocation = async () => {
