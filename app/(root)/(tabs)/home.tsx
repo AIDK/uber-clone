@@ -15,6 +15,7 @@ import GoogleTextInput from "@/components/GoogleTextInput";
 import Map from "@/components/Map";
 import { useLocationStore } from "@/store";
 import { useEffect, useState } from "react";
+import "react-native-get-random-values";
 
 const recentRides = [
   {
@@ -232,6 +233,7 @@ export default function Page() {
               containerStyle={"bg-white shadow-md shadow-neutral-300"}
               handlePress={handleDestinationPress}
             />
+
             <>
               <Text className={"text-xl font-JakartaBold mt-5 mb-3"}>
                 Your Current Location
@@ -241,9 +243,12 @@ export default function Page() {
                   "flex flex-row items-center bg-transparent h-[300px]"
                 }
               >
+                {/* Current Location (Maps) */}
                 <Map />
               </View>
             </>
+
+            {/* Recent rides */}
             <Text className={"text-xl font-JakartaBold mt-5 mb-3"}>
               Recent Rides
             </Text>
