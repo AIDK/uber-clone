@@ -7,6 +7,7 @@ import { icons } from "@/constants";
 
 const drivers = [
   {
+    id: "1",
     driver_id: 1,
     first_name: "James",
     last_name: "Wilson",
@@ -18,6 +19,7 @@ const drivers = [
     rating: 4.8,
   },
   {
+    id: "2",
     driver_id: 2,
     first_name: "David",
     last_name: "Brown",
@@ -29,6 +31,7 @@ const drivers = [
     rating: 4.6,
   },
   {
+    id: "3",
     driver_id: 3,
     first_name: "Michael",
     last_name: "Johnson",
@@ -40,6 +43,7 @@ const drivers = [
     rating: 4.7,
   },
   {
+    id: "4",
     driver_id: 4,
     first_name: "Robert",
     last_name: "Green",
@@ -71,6 +75,9 @@ const Map = () => {
   });
 
   useEffect(() => {
+    //TODO remove when adding real drivers
+    setDrivers(drivers);
+
     if (Array.isArray(drivers)) {
       if (!userLatitude || !userLongitude) return;
 
