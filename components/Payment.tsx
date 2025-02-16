@@ -19,7 +19,7 @@ const Payment = ({
 }: PaymentProps) => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const { userId } = useAuth();
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<boolean>(false);
   const {
     userAddress,
     destinationAddress,
@@ -67,6 +67,7 @@ const Payment = ({
                 payment_method_id: paymentMethod.id,
                 payment_intent_id: paymentIntent.id,
                 customer_id: customer,
+                client_secret: paymentIntent.client_secret,
               }),
             });
 
@@ -98,10 +99,10 @@ const Payment = ({
           }
         },
       },
-      returnURL: "myapp://book-ride", // redirect customer back after payment complete
+      returnURL: "myapp://(tabs)/home", // redirect customer back after payment complete
     });
     if (error) {
-      console.log(error);
+      console.log(`kakked the bed: ${error.message}`);
     }
   };
 

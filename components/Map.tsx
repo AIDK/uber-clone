@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { Driver, MarkerData } from "@/types/type";
 import { icons } from "@/constants";
 import { useFetch } from "@/lib/fetch";
-import { ActivityIndicator, View, Text } from "react-native";
+import { ActivityIndicator, View, Text, Platform } from "react-native";
 import MapViewDirections from "react-native-maps-directions";
 
 const Map = () => {
@@ -80,57 +80,68 @@ const Map = () => {
     );
   }
 
+  console.log(Platform.OS);
   return (
-    <MapView
-      provider={PROVIDER_DEFAULT}
-      className={"w-full h-full rounded-2xl"}
-      tintColor={"black"}
-      mapType={"standard"}
-      showsPointsOfInterest={false}
-      initialRegion={region}
-      showsUserLocation={true}
-      userInterfaceStyle={"light"}
-    >
-      {markers.map((marker) => (
-        <Marker
-          key={marker.id}
-          coordinate={{
-            latitude: marker.latitude,
-            longitude: marker.longitude,
-          }}
-          title={marker.title}
-          image={
-            selectedDriver === marker.id ? icons.selectedMarker : icons.marker
-          }
-        />
-      ))}
-      {destinationLatitude && destinationLongitude && (
-        <>
-          <Marker
-            key={"destination"}
-            coordinate={{
-              latitude: destinationLatitude,
-              longitude: destinationLongitude,
-            }}
-            title={"Destination"}
-            image={icons.pin}
-          />
-          <MapViewDirections
-            origin={{
-              latitude: userLatitude!,
-              longitude: userLongitude!,
-            }}
-            destination={{
-              latitude: destinationLatitude,
-              longitude: destinationLongitude,
-            }}
-            apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY!}
-            strokeColor={"#000"}
-            strokeWidth={2}
-          />
-        </>
+    <>
+      {Platform.OS !== "web" ? ( // <-- The crucial check!
+        <MapView
+          provider={PROVIDER_DEFAULT}
+          className={"w-full h-full rounded-2xl"}
+          tintColor={"black"}
+          mapType={"standard"}
+          showsPointsOfInterest={false}
+          initialRegion={region}
+          showsUserLocation={true}
+          userInterfaceStyle={"light"}
+        >
+          {markers.map((marker) => (
+            <Marker
+              key={marker.id}
+              coordinate={{
+                latitude: marker.latitude,
+                longitude: marker.longitude,
+              }}
+              title={marker.title}
+              image={
+                selectedDriver === marker.id
+                  ? icons.selectedMarker
+                  : icons.marker
+              }
+            />
+          ))}
+          {destinationLatitude && destinationLongitude && (
+            <>
+              <Marker
+                key={"destination"}
+                coordinate={{
+                  latitude: destinationLatitude,
+                  longitude: destinationLongitude,
+                }}
+                title={"Destination"}
+                image={icons.pin}
+              />
+              <MapViewDirections
+                origin={{
+                  latitude: userLatitude!,
+                  longitude: userLongitude!,
+                }}
+                destination={{
+                  latitude: destinationLatitude,
+                  longitude: destinationLongitude,
+                }}
+                apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY!}
+                strokeColor={"#000"}
+                strokeWidth={2}
+              />
+            </>
+          )}
+        </MapView>
+      ) : (
+        <View className={"flex justify-between items-center w-full"}>
+          <Text>Map is not available on web.</Text>
+        </View>
       )}
-    </MapView>
+    </>
   );
 };
 
