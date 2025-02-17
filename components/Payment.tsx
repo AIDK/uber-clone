@@ -72,8 +72,10 @@ const Payment = ({
             });
 
             if (result.client_secret) {
+              //console.log("creating ride...");
+
               // make api call to create ride
-              await fetchAPI("/(api)/(ride)/create", {
+              await fetchAPI("/(api)/ride/create", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -99,7 +101,7 @@ const Payment = ({
           }
         },
       },
-      returnURL: "myapp://(tabs)/home", // redirect customer back after payment complete
+      returnURL: "myapp://book-ride", // redirect customer back after payment complete
     });
     if (error) {
       console.log(`kakked the bed: ${error.message}`);

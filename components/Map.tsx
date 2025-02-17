@@ -80,7 +80,6 @@ const Map = () => {
     );
   }
 
-  console.log(Platform.OS);
   return (
     <>
       {Platform.OS !== "web" ? ( // <-- The crucial check!

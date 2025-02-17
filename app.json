@@ -1,11 +1,12 @@
 {
   "expo": {
-    "name": "Uber",
-    "slug": "uber",
+    "name": "Ryde",
+    "slug": "ryde",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
+    "platforms": ["ios", "android"],
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -31,7 +32,7 @@
       [
         "expo-router",
         {
-          "origin": "https://uber.dev"
+          "origin": "https://uber.dev/"
         }
       ]
     ],
