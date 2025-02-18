@@ -1,4 +1,4 @@
-﻿import { Text, View, Image, TouchableOpacity } from "react-native";
+﻿import { Text, View, Image, TouchableOpacity, Platform } from "react-native";
 import React, { useRef } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { router } from "expo-router";
