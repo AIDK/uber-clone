@@ -1,4 +1,4 @@
-﻿import { Text, View, Image, Alert } from "react-native";
+﻿import { Text, View, Image } from "react-native";
 import CustomButton from "@/components/CustomButton";
 import { icons } from "@/constants";
 import { useOAuth } from "@clerk/clerk-expo";
@@ -14,13 +14,11 @@ const OAuth = () => {
     try {
       const result = await googleOAuth(startOAuthFlow);
 
-      //TODO: this might cause redirecting issues??
-      if (result.code === "session_exists") {
-        Alert.alert("Success", "Session Exists. Redirecting to home page...");
+      // if the current session already exists or the user has
+      // successfully authenticated (signed in) we can redirect to the home screen
+      if (result.code === "session_exists" || result.code === "success") {
         router.push("/(root)/(tabs)/home");
       }
-
-      Alert.alert(result.success ? "Success" : "Error", result.message);
     } catch (err: any) {
       console.error("OAuth error", err);
     }
