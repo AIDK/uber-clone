@@ -142,8 +142,6 @@ export default function Page() {
     longitude: number;
     address: string;
   }) => {
-    console.log(location);
-
     // set the destination location to store
     setDestinationLocation(location);
 

@@ -35,7 +35,7 @@ const Payment = ({
       intentConfiguration: {
         mode: {
           amount: parseInt(amount) * 100,
-          currencyCode: "USD", //TODO: get currency from region
+          currencyCode: "USD",
         },
         confirmHandler: async (paymentMethod, _, intentCreationCallback) => {
           // make api call (using our implementation)
@@ -72,8 +72,6 @@ const Payment = ({
             });
 
             if (result.client_secret) {
-              //console.log("creating ride...");
-
               // make api call to create ride
               await fetchAPI("/(api)/ride/create", {
                 method: "POST",
@@ -104,7 +102,7 @@ const Payment = ({
       returnURL: "myapp://book-ride", // redirect customer back after payment complete
     });
     if (error) {
-      console.log(`kakked the bed: ${error.message}`);
+      console.log(`error processing payment request: ${error.message}`);
     }
   };
 
