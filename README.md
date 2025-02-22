@@ -1,50 +1,65 @@
-# Welcome to your Expo app 👋
+# Uber Clone
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This project is an Uber clone application developed using React Native, Expo, and Tailwind CSS. It aims to replicate the core functionalities of the Uber app, providing users with a seamless ride-hailing experience.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **User Authentication**: Sign up and log in using **Clerk** for authentication.
+- **Real-time Location Tracking**: View driver's and rider's locations on an interactive map.
+- **Ride Request**: Users can request rides by selecting pickup and drop-off locations.
+- **Fare Estimation**: Calculate estimated fares based on distance and time.
+- **Ride History**: Access past ride details and receipts.
+
+## Technologies Used
+
+- **React Native**: For building cross-platform mobile applications.
+- **Expo**: To streamline the development process and manage builds.
+- **Tailwind CSS**: Utilized via the `nativewind` package for styling components.
+- **TypeScript**: Ensuring type safety and improved code quality.
+- **Clerk**: Provides secure and scalable authentication for users.
+- **Neon**: A cloud-native **PostgreSQL database** used as the backend data store.
+
+## Installation
+
+1. **Clone the Repository**:
+
+   ```bash
+   git clone https://github.com/AIDK/uber-clone.git
+   cd uber-clone
+   ```
+2. **Install Dependencies**:
 
    ```bash
    npm install
    ```
-
-2. Start the app
+3. **Start the Application**:
 
    ```bash
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Project Structure
+The project's structure is organized as follows:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   `app/:` Contains the main application components and navigation setup.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   `assets/:` Houses images, icons, and other static resources.
+   
+   `components/:` Reusable UI components used throughout the app.
+   
+   `constants/:` Defines constant values and configurations.
+   
+   `store/:` State management setup, possibly using Redux or Context API.
+   
+   `types/:` TypeScript type definitions for props, state, and other structures.
 
-## Get a fresh project
+## Contributing
 
-When you're ready, run:
+Contributions are welcome! If you'd like to enhance this project, please fork the repository, create a new branch, and submit a pull request. Ensure that your code adheres to the project's coding standards and includes relevant tests.
 
-```bash
-npm run reset-project
-```
+## License
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+This project is licensed under the MIT License.
+ 
 
-## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
